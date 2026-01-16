@@ -5,48 +5,100 @@ frameworks in c++
 
 Currently supports following libs,
 
-# "Cajun":http://sourceforge.net/projects/cajun-jsonapi
-# "json_spirit":http://www.codeproject.com/KB/recipes/JSON_Spirit.aspx
-# "libjson":http://sourceforge.net/projects/libjson
-# "json-parser":https://github.com/udp/json-parser
-# "AveryWs js":https://github.com/matthewaveryusa/averyws
+# 1. [uxs::db::json](https://github.com/gbuzykin/uxs) (2e0aaa9004 Fri Dec 26 17:24:45 2025 +0300)
+# 2. [rapidjson](https://github.com/Tencent/rapidjson) (24b5e7a8b2 Sun Dec 22 15:53:24 2024 +0200)
+# 3. [jsoncpp](https://github.com/open-source-parsers/jsoncpp) (b511d9e649 Wed Nov 12 09:14:04 2025 +0100)
+# 4. [nlohmann](https://github.com/nlohmann/json) (55f93686c0 Fri Apr 11 10:42:28 2025 +0200)
+# 5. [libjson](https://github.com/mousebird/libjson) (bdb42ade3b Tue Mar 6 13:35:54 2018 -0800)
+# 6. [cajun](https://github.com/cajun-jsonapi/cajun-jsonapi) 8a26ad3a17 Wed Jun 16 22:40:16 2021 +0200)
+# 7. [json_spirit](https://github.com/png85/json_spirit) (5e16cca59b Sun Sep 6 00:14:53 2015 +0200)
+# 8. [json-parser](https://github.com/udp/json-parser) (8ac4477ad3 Fri May 9 20:01:35 2025 -0500)
+# 9. [avery](https://github.com/matthewaveryusa/averyws)
 
 See my "blog post":http://www.lijoantony.com/?p=5 for details.
 
 h2. Building
 
-# Install "git":http://git-scm.com
-# @git clone git://github.com/lijoantony/JsonBenchmarkCpp.git@
-# Edit main.cpp to suit your needs
-# Either edit the Makefile as you like and use make to build the executable 
-  or use your favourite build system to compile and link main.cpp with the libs. 
+bc. $ git clone git://github.com/gbuzykin/JsonBenchmarkCpp.git
+$ cmake -S . -B build
+$ cmake --build build
+$ cmake --install build --prefix install 
 
-h2. Results Summary
+h3. Running
 
-Frameworks ranked in the order "libjson":http://sourceforge.net/projects/libjson, "json_spirit":http://www.codeproject.com/KB/recipes/JSON_Spirit.aspx and "Cajun":http://sourceforge.net/projects/cajun-jsonapi for both parsing and writing speeds
+bc. $ cd testdata
+$ ../install/bin/JsonBenchmarkCpp
 
-Eg:
+Current run result (core-i7 14700 linux clang19.1) looks like this:
 
-bc. $./JsonBenchmarkCpp > results.dat
-averydb@debian:~/gits/JsonBenchmarkCpp$ cat results.dat  
-#library                 parsing                  writing                  
-cajun                    669                      160                      
-json_spirit              14907                    731                      
-libjson                  139                      203                      
-Avery                    35                       55                       
-json_parser              114                      
+bc. running test for: canada.json
+                 #library                  parsing                                writing
+        uxs::db::json-DOM                   238.81 MiB/s ( 100%)                   616.94 MiB/s ( 100%)
+        uxs::db::json-SAX                   565.53 MiB/s ( 237%)                      n/a
+                rapidjson                   925.63 MiB/s ( 388%)                   447.65 MiB/s (  73%)
+                 nlohmann                   128.22 MiB/s (  54%)                   339.46 MiB/s (  55%)
+                  jsoncpp                    58.54 MiB/s (  25%)                   126.24 MiB/s (  20%)
+                  libjson                    46.35 MiB/s (  19%)                   200.80 MiB/s (  33%)
+                    cajun                    14.57 MiB/s (   6%)                    94.00 MiB/s (  15%)
+              json_spirit                    19.78 MiB/s (   8%)                    93.75 MiB/s (  15%)
+              json-parser                   167.30 MiB/s (  70%)                      n/a
+                    avery                   490.41 MiB/s ( 205%)                   644.21 MiB/s ( 104%)
+running test for: citm_catalog.json
+                 #library                  parsing                                writing
+        uxs::db::json-DOM                   671.76 MiB/s ( 100%)                  1050.70 MiB/s ( 100%)
+        uxs::db::json-SAX                  1491.35 MiB/s ( 222%)                      n/a
+                rapidjson                  1686.52 MiB/s ( 251%)                  1307.62 MiB/s ( 124%)
+                 nlohmann                   330.88 MiB/s (  49%)                   397.78 MiB/s (  38%)
+                  jsoncpp                   361.64 MiB/s (  54%)                   301.18 MiB/s (  29%)
+                  libjson                   356.11 MiB/s (  53%)                   720.42 MiB/s (  69%)
+                    cajun                    44.51 MiB/s (   7%)                   114.64 MiB/s (  11%)
+              json_spirit                    14.63 MiB/s (   2%)                   259.60 MiB/s (  25%)
+              json-parser                   286.84 MiB/s (  43%)                      n/a
+                    avery                   754.44 MiB/s ( 112%)                   367.20 MiB/s (  35%)
+running test for: gsoc-2018.json
+                 #library                  parsing                                writing
+        uxs::db::json-DOM                  1235.11 MiB/s ( 100%)                   587.07 MiB/s ( 100%)
+        uxs::db::json-SAX                  2451.74 MiB/s ( 199%)                      n/a
+                rapidjson                  1482.86 MiB/s ( 120%)                  3584.78 MiB/s ( 611%)
+                 nlohmann                   441.53 MiB/s (  36%)                   368.88 MiB/s (  63%)
+                  jsoncpp                   475.55 MiB/s (  39%)                   444.13 MiB/s (  76%)
+                  libjson                   383.14 MiB/s (  31%)                   474.46 MiB/s (  81%)
+                    cajun                    71.71 MiB/s (   6%)                   182.97 MiB/s (  31%)
+              json_spirit                    16.46 MiB/s (   1%)                   247.26 MiB/s (  42%)
+              json-parser                   425.90 MiB/s (  34%)                      n/a
+                    avery                  1962.48 MiB/s ( 159%)                  2922.49 MiB/s ( 498%)
+running test for: twitter.json
+                 #library                  parsing                                writing
+        uxs::db::json-DOM                   455.04 MiB/s ( 100%)                  1042.23 MiB/s ( 100%)
+        uxs::db::json-SAX                  1402.78 MiB/s ( 308%)                      n/a
+                rapidjson                   664.28 MiB/s ( 146%)                  1278.46 MiB/s ( 123%)
+                 nlohmann                   203.15 MiB/s (  45%)                   400.01 MiB/s (  38%)
+                  jsoncpp                   235.32 MiB/s (  52%)                   348.40 MiB/s (  33%)
+                  libjson                   204.27 MiB/s (  45%)                   857.34 MiB/s (  82%)
+                    cajun                    46.72 MiB/s (  10%)                   192.79 MiB/s (  18%)
+              json_spirit                    13.31 MiB/s (   3%)                   440.70 MiB/s (  42%)
+              json-parser                   291.75 MiB/s (  64%)                      n/a
+                    avery                   910.86 MiB/s ( 200%)                   730.49 MiB/s (  70%)
+running test for: gltf.json
+                 #library                  parsing                                writing
+        uxs::db::json-DOM                   342.48 MiB/s ( 100%)                   778.43 MiB/s ( 100%)
+        uxs::db::json-SAX                   829.26 MiB/s ( 242%)                      n/a
+                rapidjson                   827.20 MiB/s ( 242%)                   887.65 MiB/s ( 114%)
+                 nlohmann                   187.02 MiB/s (  55%)                   309.68 MiB/s (  40%)
+                  jsoncpp                   131.21 MiB/s (  38%)                   192.48 MiB/s (  25%)
+                  libjson                   127.68 MiB/s (  37%)                   557.44 MiB/s (  72%)
+                    cajun                    29.24 MiB/s (   9%)                   104.67 MiB/s (  13%)
+              json_spirit                    13.09 MiB/s (   4%)                   176.50 MiB/s (  23%)
+              json-parser                   225.45 MiB/s (  66%)                      n/a
+                    avery                   520.82 MiB/s ( 152%)                   370.56 MiB/s (  48%)
+running test for: wikidatawiki-20220720-pages-articles-multistream6.xml-p5969005p6052571
+                 #library                  parsing                                writing
+         uxs::db::xml-SAX                   699.65 MiB/s ( 100%)                      n/a
+running test for: iceland-latest.osm
+                 #library                  parsing                                writing
+         uxs::db::xml-SAX                   368.98 MiB/s ( 100%)                      n/a
 
-
-Here the numbers shows time taken by each lib for the particular operation in microseconds.
-libjson is a clear winner among the three.
-Sample results and corresponding graphs are available in results directory.
-For accurate results, replace the content of file data.json with your JSON data and run the executable.
-
-Use the gnuplot script results/graph.p to draw bar diagram out of this data:
-
-bc. $ ./graph.p > graph.png
-
-h3. Thanks
+h4. Thanks
 
 Thanks to the library authors for their effort and time.
 You saved me from reinventing the same wheel again!
