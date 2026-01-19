@@ -1,5 +1,0 @@
-JsonBenchmarkCpp
-*.o
-.*.swp
-libs/libjson/libjson/libjson.a
-libs/json_spirit/json_spirit_v4.05/build/
