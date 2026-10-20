@@ -131,7 +131,10 @@ std::pair<double, double> cajunBenchmark(const std::string& name, const std::str
         ofs << s_out;
         return {parse_speed, s_out.size() * iter_count / std::chrono::duration<double>(time2 - time1).count()};
 
-    } catch (const std::exception&) { return {0, 0}; }
+    } catch (const std::exception& e) {
+        std::cout << "Exception caught: " << e.what() << std::endl;
+        return {0, 0};
+    }
 }
 
 /*
@@ -336,7 +339,7 @@ std::pair<double, double> uxsDbJsonBenchmark(const std::string& name, const std:
         uxs::db::value v;
         time1 = std::chrono::high_resolution_clock::now();
         for (int i = 0; i < iter_count; i++) {
-            v = uxs::db::json::read(buff);
+            v = uxs::db::json::parse(buff);
             buff.clear();
             buff.seek(0);
         }
@@ -360,7 +363,10 @@ std::pair<double, double> uxsDbJsonBenchmark(const std::string& name, const std:
 
         return {parse_speed, s_out.size() * iter_count / std::chrono::duration<double>(time2 - time1).count()};
 
-    } catch (const std::exception&) { return {0, 0}; }
+    } catch (const std::exception& e) {
+        std::cout << "Exception caught: " << e.what() << std::endl;
+        return {0, 0};
+    }
 }
 
 std::pair<double, double> uxsDbJsonBenchmark_SAX(const std::string& name, const std::string& jsonString,
@@ -373,7 +379,7 @@ std::pair<double, double> uxsDbJsonBenchmark_SAX(const std::string& name, const 
         // Parsing the string
         time1 = std::chrono::high_resolution_clock::now();
         for (int i = 0; i < iter_count; i++) {
-            uxs::db::json::read(
+            uxs::db::json::parse(
                 buff, [](uxs::db::json::token_t, std::string_view) { return uxs::db::json::parse_step::into; }, []() {},
                 [](std::string_view) {}, []() {});
             buff.clear();
@@ -383,7 +389,10 @@ std::pair<double, double> uxsDbJsonBenchmark_SAX(const std::string& name, const 
 
         return {jsonString.size() * iter_count / std::chrono::duration<double>(time2 - time1).count(), 0};
 
-    } catch (const std::exception&) { return {0, 0}; }
+    } catch (const std::exception& e) {
+        std::cout << "Exception caught: " << e.what() << std::endl;
+        return {0, 0};
+    }
 }
 
 std::pair<double, double> nlohmannBenchmark(const std::string& name, const std::string& jsonString, int iter_count) {
@@ -457,9 +466,8 @@ std::pair<double, double> uxsDbXmlBenchmark_SAX(const std::string& name, const s
         time1 = std::chrono::high_resolution_clock::now();
         for (int i = 0; i < iter_count; i++) {
             {
-                uxs::db::xml::parser rd(buff);
-                uxs::db::xml::parser::iterator it{rd}, it_end{};
-                while (it != it_end) { ++it; }
+                uxs::db::xml::parser<char> rd(buff);
+                for (auto it = rd.begin(); it != rd.end(); ++it) {}
             }
             buff.clear();
             buff.seek(0);
@@ -468,7 +476,10 @@ std::pair<double, double> uxsDbXmlBenchmark_SAX(const std::string& name, const s
 
         return {xmlString.size() * iter_count / std::chrono::duration<double>(time2 - time1).count(), 0};
 
-    } catch (const std::exception&) { return {0, 0}; }
+    } catch (const std::exception& e) {
+        std::cout << "Exception caught: " << e.what() << std::endl;
+        return {0, 0};
+    }
 }
 
 void testXml(const std::string& name) {

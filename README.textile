@@ -5,7 +5,7 @@ frameworks in c++
 
 Currently supports following libs,
 
-# 1. [uxs::db::json](https://github.com/gbuzykin/uxs) (67536682cc Wed Aug 26 12:17:45 2026 +0300)
+# 1. [uxs::db::json](https://github.com/gbuzykin/uxs) (21b6b9638c Tue Oct 20 14:34:22 2026 +0300)
 # 2. [rapidjson](https://github.com/Tencent/rapidjson) (24b5e7a8b2 Sun Dec 22 15:53:24 2024 +0200)
 # 3. [jsoncpp](https://github.com/open-source-parsers/jsoncpp) (b511d9e649 Wed Nov 12 09:14:04 2025 +0100)
 # 4. [nlohmann](https://github.com/nlohmann/json) (55f93686c0 Fri Apr 11 10:42:28 2025 +0200)
@@ -35,70 +35,70 @@ Current run result (core-i7 14700 linux clang 22.1.8 + libc++):
 
 running test for: canada.json
                  #library                  parsing                                writing
-        uxs::db::json-DOM                   249.45 MiB/s ( 100%)                   644.60 MiB/s ( 100%)
-        uxs::db::json-SAX                   631.33 MiB/s ( 253%)                      n/a              
-                rapidjson                   957.06 MiB/s ( 384%)                   452.92 MiB/s (  70%)
-                 nlohmann                   119.93 MiB/s (  48%)                   330.11 MiB/s (  51%)
-                  jsoncpp                    50.02 MiB/s (  20%)                   114.67 MiB/s (  18%)
-                  libjson                    58.84 MiB/s (  24%)                   539.28 MiB/s (  84%)
-                    cajun                    10.62 MiB/s (   4%)                    89.22 MiB/s (  14%)
-              json_spirit                    28.49 MiB/s (  11%)                    86.71 MiB/s (  13%)
-              json-parser                   179.42 MiB/s (  72%)                      n/a              
-                    avery                   481.51 MiB/s ( 193%)                   618.01 MiB/s (  96%)
+        uxs::db::json-DOM                   255.74 MiB/s ( 100%)                   613.14 MiB/s ( 100%)
+        uxs::db::json-SAX                   648.71 MiB/s ( 254%)                      n/a
+                rapidjson                   989.42 MiB/s ( 387%)                   452.06 MiB/s (  74%)
+                 nlohmann                   118.39 MiB/s (  46%)                   327.09 MiB/s (  53%)
+                  jsoncpp                    49.87 MiB/s (  20%)                   113.73 MiB/s (  19%)
+                  libjson                    58.17 MiB/s (  23%)                   540.81 MiB/s (  88%)
+                    cajun                     9.37 MiB/s (   4%)                    89.43 MiB/s (  15%)
+              json_spirit                    28.50 MiB/s (  11%)                    86.53 MiB/s (  14%)
+              json-parser                   180.45 MiB/s (  71%)                      n/a
+                    avery                   490.35 MiB/s ( 192%)                   578.43 MiB/s (  94%)
 running test for: citm_catalog.json
                  #library                  parsing                                writing
-        uxs::db::json-DOM                   730.35 MiB/s ( 100%)                  1125.49 MiB/s ( 100%)
-        uxs::db::json-SAX                  1739.15 MiB/s ( 238%)                      n/a              
-                rapidjson                  1612.30 MiB/s ( 221%)                  1433.39 MiB/s ( 127%)
-                 nlohmann                   337.56 MiB/s (  46%)                   287.49 MiB/s (  26%)
-                  jsoncpp                   277.98 MiB/s (  38%)                   244.02 MiB/s (  22%)
-                  libjson                   339.20 MiB/s (  46%)                   402.67 MiB/s (  36%)
-                    cajun                    38.96 MiB/s (   5%)                    81.80 MiB/s (   7%)
-              json_spirit                    21.94 MiB/s (   3%)                   165.23 MiB/s (  15%)
-              json-parser                   294.10 MiB/s (  40%)                      n/a              
-                    avery                   683.84 MiB/s (  94%)                   260.33 MiB/s (  23%)
+        uxs::db::json-DOM                   777.76 MiB/s ( 100%)                  1243.52 MiB/s ( 100%)
+        uxs::db::json-SAX                  1716.70 MiB/s ( 221%)                      n/a
+                rapidjson                  1672.05 MiB/s ( 215%)                  1433.25 MiB/s ( 115%)
+                 nlohmann                   338.19 MiB/s (  43%)                   286.18 MiB/s (  23%)
+                  jsoncpp                   276.53 MiB/s (  36%)                   235.00 MiB/s (  19%)
+                  libjson                   345.11 MiB/s (  44%)                   391.08 MiB/s (  31%)
+                    cajun                    38.89 MiB/s (   5%)                    80.94 MiB/s (   7%)
+              json_spirit                    22.03 MiB/s (   3%)                   160.07 MiB/s (  13%)
+              json-parser                   294.92 MiB/s (  38%)                      n/a
+                    avery                   734.53 MiB/s (  94%)                   251.04 MiB/s (  20%)
 running test for: gsoc-2018.json
                  #library                  parsing                                writing
-        uxs::db::json-DOM                  1252.68 MiB/s ( 100%)                   604.86 MiB/s ( 100%)
-        uxs::db::json-SAX                  2427.72 MiB/s ( 194%)                      n/a              
-                rapidjson                  1470.31 MiB/s ( 117%)                  3612.42 MiB/s ( 597%)
-                 nlohmann                   459.78 MiB/s (  37%)                   305.12 MiB/s (  50%)
-                  jsoncpp                   299.84 MiB/s (  24%)                   334.57 MiB/s (  55%)
-                  libjson                   327.21 MiB/s (  26%)                   310.26 MiB/s (  51%)
-                    cajun                    53.69 MiB/s (   4%)                    97.30 MiB/s (  16%)
-              json_spirit                    28.34 MiB/s (   2%)                   202.35 MiB/s (  33%)
-              json-parser                   451.25 MiB/s (  36%)                      n/a              
-                    avery                  2035.06 MiB/s ( 162%)                  1941.18 MiB/s ( 321%)
+        uxs::db::json-DOM                  1277.35 MiB/s ( 100%)                  2641.51 MiB/s ( 100%)
+        uxs::db::json-SAX                  2395.17 MiB/s ( 188%)                      n/a
+                rapidjson                  1615.15 MiB/s ( 126%)                  3665.68 MiB/s ( 139%)
+                 nlohmann                   466.61 MiB/s (  37%)                   305.12 MiB/s (  12%)
+                  jsoncpp                   299.33 MiB/s (  23%)                   329.75 MiB/s (  12%)
+                  libjson                   328.79 MiB/s (  26%)                   305.60 MiB/s (  12%)
+                    cajun                    53.51 MiB/s (   4%)                    96.41 MiB/s (   4%)
+              json_spirit                    28.45 MiB/s (   2%)                   201.70 MiB/s (   8%)
+              json-parser                   454.86 MiB/s (  36%)                      n/a
+                    avery                  2073.50 MiB/s ( 162%)                  1854.87 MiB/s (  70%)
 running test for: twitter.json
                  #library                  parsing                                writing
-        uxs::db::json-DOM                   479.82 MiB/s ( 100%)                  1101.12 MiB/s ( 100%)
-        uxs::db::json-SAX                  1492.09 MiB/s ( 311%)                      n/a              
-                rapidjson                   676.18 MiB/s ( 141%)                  1281.26 MiB/s ( 116%)
-                 nlohmann                   231.79 MiB/s (  48%)                   334.98 MiB/s (  30%)
-                  jsoncpp                   183.92 MiB/s (  38%)                   293.70 MiB/s (  27%)
-                  libjson                   207.97 MiB/s (  43%)                   411.27 MiB/s (  37%)
-                    cajun                    40.81 MiB/s (   9%)                   110.59 MiB/s (  10%)
-              json_spirit                    22.81 MiB/s (   5%)                   335.43 MiB/s (  30%)
-              json-parser                   298.51 MiB/s (  62%)                      n/a              
-                    avery                   905.35 MiB/s ( 189%)                   501.30 MiB/s (  46%)
+        uxs::db::json-DOM                   578.84 MiB/s ( 100%)                  1712.47 MiB/s ( 100%)
+        uxs::db::json-SAX                  1441.30 MiB/s ( 249%)                      n/a
+                rapidjson                   723.08 MiB/s ( 125%)                  1292.40 MiB/s (  75%)
+                 nlohmann                   233.07 MiB/s (  40%)                   334.36 MiB/s (  20%)
+                  jsoncpp                   185.69 MiB/s (  32%)                   288.28 MiB/s (  17%)
+                  libjson                   208.44 MiB/s (  36%)                   404.17 MiB/s (  24%)
+                    cajun                    40.37 MiB/s (   7%)                   107.90 MiB/s (   6%)
+              json_spirit                    22.90 MiB/s (   4%)                   331.64 MiB/s (  19%)
+              json-parser                   300.61 MiB/s (  52%)                      n/a
+                    avery                   943.67 MiB/s ( 163%)                   480.99 MiB/s (  28%)
 running test for: gltf.json
                  #library                  parsing                                writing
-        uxs::db::json-DOM                   384.20 MiB/s ( 100%)                   920.10 MiB/s ( 100%)
-        uxs::db::json-SAX                   964.96 MiB/s ( 251%)                      n/a              
-                rapidjson                   847.60 MiB/s ( 221%)                   903.03 MiB/s (  98%)
-                 nlohmann                   201.51 MiB/s (  52%)                   271.63 MiB/s (  30%)
-                  jsoncpp                   115.24 MiB/s (  30%)                   164.14 MiB/s (  18%)
-                  libjson                   133.63 MiB/s (  35%)                   346.95 MiB/s (  38%)
-                    cajun                    25.33 MiB/s (   7%)                    79.25 MiB/s (   9%)
-              json_spirit                    20.71 MiB/s (   5%)                   126.76 MiB/s (  14%)
-              json-parser                   240.53 MiB/s (  63%)                      n/a              
-                    avery                   498.40 MiB/s ( 130%)                   277.59 MiB/s (  30%)
+        uxs::db::json-DOM                   358.55 MiB/s ( 100%)                  1046.60 MiB/s ( 100%)
+        uxs::db::json-SAX                   971.52 MiB/s ( 271%)                      n/a
+                rapidjson                   901.62 MiB/s ( 251%)                   859.09 MiB/s (  82%)
+                 nlohmann                   200.93 MiB/s (  56%)                   272.23 MiB/s (  26%)
+                  jsoncpp                   115.15 MiB/s (  32%)                   160.85 MiB/s (  15%)
+                  libjson                   133.06 MiB/s (  37%)                   351.98 MiB/s (  34%)
+                    cajun                    25.28 MiB/s (   7%)                    77.99 MiB/s (   7%)
+              json_spirit                    20.81 MiB/s (   6%)                   123.68 MiB/s (  12%)
+              json-parser                   242.43 MiB/s (  68%)                      n/a
+                    avery                   507.04 MiB/s ( 141%)                   264.32 MiB/s (  25%)
 running test for: wikidatawiki-20220720-pages-articles-multistream6.xml-p5969005p6052571
                  #library                  parsing                                writing
-         uxs::db::xml-SAX                   718.32 MiB/s ( 100%)                      n/a              
+         uxs::db::xml-SAX                   798.09 MiB/s ( 100%)                      n/a
 running test for: iceland-latest.osm
                  #library                  parsing                                writing
-         uxs::db::xml-SAX                   475.88 MiB/s ( 100%)                      n/a 
+         uxs::db::xml-SAX                   531.76 MiB/s ( 100%)                      n/a
          
 h5. Thanks
 
