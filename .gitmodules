@@ -1,3 +1,15 @@
 [submodule "libs/uxs"]
 	path = libs/uxs
-	url = ../uxs.git
+	url = https://github.com/gbuzykin/uxs.git
+[submodule "libs/rapidjson"]
+	path = libs/rapidjson
+	url = https://github.com/Tencent/rapidjson.git
+[submodule "libs/jsoncpp"]
+	path = libs/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp.git
+[submodule "libs/nlohmann"]
+	path = libs/nlohmann
+	url = https://github.com/nlohmann/json.git
+[submodule "libs/json-parser"]
+	path = libs/json-parser
+	url = https://github.com/udp/json-parser.git

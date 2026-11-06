@@ -4,47 +4,27 @@
  *
  * Currently supporting following libs,
  *
- * 1. uxs::db::json (https://github.com/gbuzykin/uxs.git 2e0aaa9004 Fri Dec 26 17:24:45 2025 +0300)
- * 2. rapidjson (https://github.com/Tencent/rapidjson.git 24b5e7a8b2 Sun Dec 22 15:53:24 2024 +0200)
- * 3. jsoncpp (https://github.com/open-source-parsers/jsoncpp.git b511d9e649 Wed Nov 12 09:14:04 2025 +0100)
- * 4. nlohmann (https://github.com/nlohmann/json.git 55f93686c0 Fri Apr 11 10:42:28 2025 +0200)
- * 5. libjson (https://github.com/mousebird/libjson.git bdb42ade3b Tue Mar 6 13:35:54 2018 -0800)
- * 6. cajun (https://github.com/cajun-jsonapi/cajun-jsonapi.git 8a26ad3a17 Wed Jun 16 22:40:16 2021 +0200)
- * 7. json_spirit (https://github.com/png85/json_spirit.git 5e16cca59b Sun Sep 6 00:14:53 2015 +0200)
- * 8. json-parser (https://github.com/udp/json-parser.git 8ac4477ad3 Fri May 9 20:01:35 2025 -0500)
- * 9. avery
+ * 1. uxs::db::json (https://github.com/gbuzykin/uxs)
+ * 2. rapidjson (https://github.com/Tencent/rapidjson)
+ * 3. jsoncpp (https://github.com/open-source-parsers/jsoncpp)
+ * 4. nlohmann (https://github.com/nlohmann/json)
+ * 5. json-parser (https://github.com/udp/json-parser)
+ * 6. libjson (https://github.com/mousebird/libjson)
+ * 7. cajun (https://github.com/cajun-jsonapi/cajun-jsonapi)
+ * 8. json_spirit (https://github.com/png85/json_spirit)
+ * 9. avery (https://github.com/matthewaveryusa/averyws ???)
  *
  * Copyright Lijo Antony 2011
  * Distributed under Apache License, Version 2.0
  * see accompanying file LICENSE.txt
  */
 
-#include <nlohmann/json.hpp>
-
-#include <chrono>
-#include <ctime>
-#include <fstream>
-#include <iomanip>
-#include <iostream>
-#include <sstream>
-
-// Cajun headers
-#include <cajun/json/elements.h>
-#include <cajun/json/reader.h>
-#include <cajun/json/writer.h>
-
-// json_spirit headers
-#include <json_spirit.h>
-
-// libjson headers
-#include <libjson.h>
-
-// json-parser headers
-#define json_string __json_string
-#include <json-parser/json.h>
-#undef json_string
-
-#include <utilities_js.hpp>
+// uxs headers
+#include <uxs/db/json.h>
+#include <uxs/db/value.h>
+#include <uxs/db/xml.h>
+#include <uxs/io/iflatbuf.h>
+#include <uxs/io/oflatbuf.h>
 
 // rapidjson headers
 #if defined(__SSE4_2__)
@@ -52,18 +32,42 @@
 #elif defined(__SSE2__)
 #    define RAPIDJSON_SSE2
 #endif
-
-#include <uxs/db/json.h>
-#include <uxs/db/value.h>
-#include <uxs/db/xml.h>
-#include <uxs/io/iflatbuf.h>
-#include <uxs/io/oflatbuf.h>
-
-#include <json/reader.h>
-#include <json/writer.h>
 #include <rapidjson/document.h>
 #include <rapidjson/stringbuffer.h>
 #include <rapidjson/writer.h>
+
+// jsoncpp headers
+#include <json/reader.h>
+#include <json/writer.h>
+
+// nlohmann headers
+#include <nlohmann/json.hpp>
+
+// json-parser headers
+#define json_string __json_string
+#include <../json-parser/json.h>
+#undef json_string
+
+// libjson headers
+#include <libjson.h>
+
+// cajun headers
+#include <cajun/json/elements.h>
+#include <cajun/json/reader.h>
+#include <cajun/json/writer.h>
+
+// json_spirit headers
+#include <json_spirit.h>
+
+// avery headers
+#include <utilities_js.hpp>
+
+#include <chrono>
+#include <ctime>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 
 /*
  * @brief A function to print time duration
@@ -449,10 +453,10 @@ void testJson(const std::string& name) {
     printBenchmark("rapidjson", rapidjsonBenchmark(name, buff, iter_count), ref);
     printBenchmark("nlohmann", nlohmannBenchmark(name, buff, iter_count), ref);
     printBenchmark("jsoncpp", jsonCppBenchmark(name, buff, iter_count), ref);
+    printBenchmark("json-parser", jsonparserBenchmark(name, buff, iter_count), ref);
     printBenchmark("libjson", libjsonBenchmark(name, buff, iter_count), ref);
     printBenchmark("cajun", cajunBenchmark(name, buff, iter_count), ref);
     printBenchmark("json_spirit", jsonspiritBenchmark(name, buff, iter_count), ref);
-    printBenchmark("json-parser", jsonparserBenchmark(name, buff, iter_count), ref);
     printBenchmark("avery", averyBenchmark(name, buff, iter_count), ref);
 }
 

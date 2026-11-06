@@ -43,7 +43,8 @@ endif()
 block()
 set(UXS_USE_ZLIB OFF)
 set(UXS_USE_LIBZIP OFF)
-set(UXS_DO_INSTALL_SDK OFF)
+set(UXS_BUILD_STATIC_ONLY ON)
+set(UXS_DO_INSTALL OFF)
 FetchContent_Declare(uxs SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/uxs)
 FetchContent_MakeAvailable(uxs)
 endblock()
@@ -54,6 +55,7 @@ add_executable(
   libs/jsoncpp/src/lib_json/json_value.cpp
   libs/jsoncpp/src/lib_json/json_reader.cpp
   libs/jsoncpp/src/lib_json/json_writer.cpp
+  libs/json-parser/json.c
   libs/libjson/_internal/Source/internalJSONNode.cpp
   libs/libjson/_internal/Source/JSONAllocator.cpp
   libs/libjson/_internal/Source/JSONChildren.cpp
@@ -69,8 +71,7 @@ add_executable(
   libs/libjson/_internal/Source/libjson.cpp
   libs/json_spirit/json_spirit/json_spirit_reader.cpp
   libs/json_spirit/json_spirit/json_spirit_value.cpp
-  libs/json_spirit/json_spirit/json_spirit_writer.cpp
-  libs/json-parser/json-parser/json.c)
+  libs/json_spirit/json_spirit/json_spirit_writer.cpp)
 
 target_compile_options(
   JsonBenchmarkCpp PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/Zc:__cplusplus /utf-8>)
@@ -86,7 +87,7 @@ target_include_directories(
           libs/json-parser
           libs/avery)
 
-target_link_libraries(JsonBenchmarkCpp PRIVATE UXS::UXS)
+target_link_libraries(JsonBenchmarkCpp PRIVATE UXS::UXS-static)
 
 install(TARGETS JsonBenchmarkCpp RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
                                          COMPONENT binary)
